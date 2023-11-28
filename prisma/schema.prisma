@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// create user based on login
+// each user can have only one profile
+// each user can have multiple posts
+
+// Profile
+//   image url
+//   bio
+
+// Post
+//   published
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+  Profile   Profile[]
+}
+
+model Profile {
+  id       Int     @id @default(autoincrement())
+  bio      String?
+  imageUrl String?
+  user     User    @relation(fields: [id], references: [id], onUpdate: NoAction, onDelete: NoAction)
+}
