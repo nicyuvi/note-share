@@ -8,28 +8,24 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// create user based on login
-// each user can have only one profile
-// each user can have multiple posts
-
-// Profile
-//   image url
-//   bio
-
-// Post
-//   published
-
-model User {
-  id        Int       @id @default(autoincrement())
-  email     String    @unique
-  name      String
-  createdAt DateTime  @default(now())
-  Profile   Profile[]
+model Profile {
+  id        Int      @id @default(autoincrement())
+  userId    String   @unique
+  name      String   @unique
+  bio       String?
+  imageUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  notes     Note[]
 }
 
-model Profile {
-  id       Int     @id @default(autoincrement())
-  bio      String?
-  imageUrl String?
-  user     User    @relation(fields: [id], references: [id], onUpdate: NoAction, onDelete: NoAction)
+model Note {
+  id        Int      @id @default(autoincrement())
+  authorId  String
+  title     String
+  body      String
+  published Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  author    Profile  @relation(fields: [authorId], references: [userId])
 }
