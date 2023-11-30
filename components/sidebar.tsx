@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 const Sidebar = () => {
   return (
-    <aside>
+    <aside className="bg-slate-500 mb-4">
       <ul>
         <li>
           <Link href="/">Home</Link>

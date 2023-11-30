@@ -9,14 +9,7 @@ export async function createProfile(formData: any) {
   const schema = z.object({
     userId: z.string(),
     name: z.string().min(1).max(50),
-    bio: z
-      .string()
-      .min(10, {
-        message: 'Bio must be at least 10 characters.',
-      })
-      .max(160, {
-        message: 'Bio must not be longer than 30 characters.',
-      }),
+    bio: z.string().min(1).max(160),
     imageUrl: z.string(),
   })
 

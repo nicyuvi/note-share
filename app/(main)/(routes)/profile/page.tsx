@@ -1,12 +1,14 @@
 import { getProfile } from '@/lib/profile'
+import type { Profile } from '@prisma/client'
 
 const Profile = async () => {
   const profile = await getProfile()
-  console.log(profile, 'profile')
+  const { name, bio } = profile as Profile
 
   return (
     <>
-      <div>Profile page. user can edit profile info here</div>
+      <p>{name}</p>
+      <p>{bio}</p>
     </>
   )
 }

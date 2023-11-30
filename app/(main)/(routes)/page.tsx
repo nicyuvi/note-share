@@ -13,7 +13,7 @@ const Home = async () => {
 
   return (
     <>
-      <Notes notes={notes} />
+      <Notes profile={profile} notes={notes} />
       <UserButton afterSignOutUrl="/" />
     </>
   )

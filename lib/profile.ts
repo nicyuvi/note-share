@@ -6,12 +6,11 @@ export async function getProfile() {
   try {
     const profile = await db.profile.findUnique({
       where: {
-        userId: userId as string, // can't be null since this is protected page
+        userId: userId as string,
       },
     })
     return profile
   } catch (e) {
     console.error(e)
-    process.exit(1)
   }
 }
