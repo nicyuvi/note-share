@@ -19,10 +19,12 @@ export async function createProfile(formData: any) {
       }),
     imageUrl: z.string(),
   })
+
+  let tag = Math.floor(1000 + Math.random() * 9000)
   // safe parse so we can handle errors when validation fails
   const parse = schema.safeParse({
     userId,
-    name,
+    name: `${name}#${tag}`,
     bio,
     imageUrl,
   })
@@ -32,7 +34,6 @@ export async function createProfile(formData: any) {
   }
 
   const data = parse.data
-  console.log(data, 'server')
 
   try {
     await db.profile.create({

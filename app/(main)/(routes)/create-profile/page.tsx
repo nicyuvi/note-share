@@ -39,7 +39,6 @@ const CreateProfile = () => {
   })
 
   const action: () => void = form.handleSubmit(async (data) => {
-    console.log(data, 'client')
     const response = await createProfile(data)
     if (response.error) {
       alert(response.error)
