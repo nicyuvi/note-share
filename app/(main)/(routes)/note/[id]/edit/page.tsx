@@ -18,11 +18,11 @@ import { createNote } from '@/actions/create-note'
 import { getNote } from '@/actions/get-note'
 import { useState, useEffect } from 'react'
 
-const EditNote = ({ params }: { params: { id: number } }) => {
+const EditNote = ({ params }: { params: { id: string } }) => {
   const [note, setNote] = useState<any>() // note type from prisma ?
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getNote(params.id)
+      const response = await getNote(Number(params.id))
       if (response.error) {
         alert(response.error)
       } else {
