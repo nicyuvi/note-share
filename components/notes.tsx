@@ -4,10 +4,8 @@ import type { Note } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { deleteNote } from '@/actions/delete-note'
 import { editNote } from '@/actions/edit-note'
-// import DeleteButton from '@/components/ui/delete-button'
-// import { startTransition } from 'react'
 
-// TODO: server mutations -- edit and delete
+// TODO: server mutations -- edit
 
 const Notes = ({ notes, profile }: any) => {
   const { name } = profile

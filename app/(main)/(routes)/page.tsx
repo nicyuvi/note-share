@@ -1,8 +1,8 @@
 import { UserButton } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 import Notes from '@/components/notes'
-import { getProfile } from '@/lib/profile'
-import { getNotes } from '@/lib/note'
+import { getProfile } from '@/lib/utils'
+import { getNotes } from '@/lib/utils'
 
 const Home = async () => {
   const profile = await getProfile()
