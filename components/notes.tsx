@@ -1,8 +1,24 @@
+'use client'
 import Link from 'next/link'
 import type { Note } from '@prisma/client'
+import { Button } from '@/components/ui/button'
+import { deleteNote } from '@/actions/delete-note'
+import { editNote } from '@/actions/edit-note'
+// import DeleteButton from '@/components/ui/delete-button'
+// import { startTransition } from 'react'
+
+// TODO: server mutations -- edit and delete
 
 const Notes = ({ notes, profile }: any) => {
   const { name } = profile
+  async function handleDelete(id: number) {
+    const response = await deleteNote(id)
+    if (response.error) {
+      alert(response.error)
+    } else {
+      alert(response.success)
+    }
+  }
   return (
     <>
       {notes.length > 0 ? (
@@ -12,6 +28,23 @@ const Notes = ({ notes, profile }: any) => {
               <p>{title}</p>
               <p>{content}</p>
               <p>{name}</p>
+              <Button
+                onClick={() => {
+                  editNote(id)
+                }}
+                variant="secondary"
+                className="mr-4"
+              >
+                edit
+              </Button>
+              <Button
+                onClick={() => {
+                  handleDelete(id)
+                }}
+                variant="destructive"
+              >
+                delete
+              </Button>
             </div>
           )
         })

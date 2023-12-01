@@ -6,5 +6,6 @@ export async function getNotes() {
     return notes
   } catch (e) {
     console.error(e)
+    return { error: 'Failed to get notes' }
   }
 }

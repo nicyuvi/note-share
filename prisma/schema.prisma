@@ -27,5 +27,5 @@ model Note {
   // published Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    Profile  @relation(fields: [authorId], references: [userId])
+  author    Profile  @relation(fields: [authorId], references: [userId], onUpdate: NoAction, onDelete: NoAction)
 }
