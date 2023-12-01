@@ -7,6 +7,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// i think i move get request to server actions also
 export async function getProfile() {
   const { userId } = auth()
   try {

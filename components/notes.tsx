@@ -4,11 +4,14 @@ import type { Note } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { deleteNote } from '@/actions/delete-note'
 import { editNote } from '@/actions/edit-note'
+import { useRouter } from 'next/navigation'
 
 // TODO: server mutations -- edit
 
 const Notes = ({ notes, profile }: any) => {
   const { name } = profile
+  const { push } = useRouter()
+
   async function handleDelete(id: number) {
     const response = await deleteNote(id)
     if (response.error) {
@@ -17,37 +20,33 @@ const Notes = ({ notes, profile }: any) => {
       alert(response.success)
     }
   }
+
   return (
     <>
       {notes.length > 0 ? (
         notes.map(({ id, title, content }: Note) => {
           return (
             <div key={id} className="bg-blue-100 mb-4">
-              <p>{title}</p>
-              <p>{content}</p>
-              <p>{name}</p>
+              <div onClick={() => push(`/note/${id}`)}>
+                <p>{title}</p>
+                <p>{content}</p>
+                <p>{name}</p>
+              </div>
               <Button
-                onClick={() => {
-                  editNote(id)
-                }}
+                onClick={() => push(`/note/${id}/edit`)}
                 variant="secondary"
                 className="mr-4"
               >
                 edit
               </Button>
-              <Button
-                onClick={() => {
-                  handleDelete(id)
-                }}
-                variant="destructive"
-              >
+              <Button onClick={() => handleDelete(id)} variant="destructive">
                 delete
               </Button>
             </div>
           )
         })
       ) : (
-        <Link href="/create-note">Create New Note</Link>
+        <Link href="/note/create">Create New Note</Link>
       )}
     </>
   )
