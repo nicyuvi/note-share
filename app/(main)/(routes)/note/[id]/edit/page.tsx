@@ -1,7 +1,7 @@
 'use client'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
+import { useForm, useFormContext } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -18,8 +18,25 @@ import { createNote } from '@/actions/create-note'
 import { getNote } from '@/actions/get-note'
 import { useState, useEffect } from 'react'
 
+// TODO: i have data in client now. setNote, then populate default form values with note
+// TODO: try react-hook-form reset() for default values
+
+const formSchema = z.object({
+  title: z.string().min(1).max(50),
+  content: z
+    .string()
+    .min(1, {
+      message: 'Content cannot be empty.',
+    })
+    .max(255, {
+      message: 'Content must not be longer than 255 characters.',
+    }),
+})
+
 const EditNote = ({ params }: { params: { id: string } }) => {
+  const { reset, getValues } = useFormContext()
   const [note, setNote] = useState<any>() // note type from prisma ?
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await getNote(Number(params.id))
@@ -34,17 +51,6 @@ const EditNote = ({ params }: { params: { id: string } }) => {
 
   console.log(note, 'display note info in client')
 
-  const formSchema = z.object({
-    title: z.string().min(1).max(50),
-    content: z
-      .string()
-      .min(1, {
-        message: 'Content cannot be empty.',
-      })
-      .max(255, {
-        message: 'Content must not be longer than 255 characters.',
-      }),
-  })
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
