@@ -19,7 +19,6 @@ export async function createNote(formData: FormData) {
     content: z.string().min(1).max(255),
   })
 
-  let tag = Math.floor(1000 + Math.random() * 9000)
   // safe parse so we can handle errors when validation fails
   const parse = schema.safeParse({
     authorId: userId,
