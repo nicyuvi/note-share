@@ -1,7 +1,7 @@
 'use client'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, useFormContext } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -17,9 +17,6 @@ import { redirect } from 'next/navigation'
 import { editNote } from '@/actions/edit-note'
 import { Note } from '@prisma/client'
 
-// TODO: i have data in client now. setNote, then populate default form values with note
-// TODO: try react-hook-form reset() for default values
-
 const formSchema = z.object({
   title: z.string().min(1).max(50),
   content: z
@@ -34,10 +31,10 @@ const formSchema = z.object({
 
 type EditNoteType = {
   note: Note
+  noteId: string
 }
 
-const EditNoteForm = ({ note }: EditNoteType) => {
-  // const { reset, getValues } = useFormContext()
+const EditNoteForm = ({ note, noteId }: EditNoteType) => {
   const { title, content } = note
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,13 +46,14 @@ const EditNoteForm = ({ note }: EditNoteType) => {
   })
 
   const action: () => void = form.handleSubmit(async (data) => {
-    // const response = await editNote(data)
-    // if (response.error) {
-    //   alert(response.error)
-    // } else {
-    //   alert(response.success)
-    //   redirect('/')
-    // }
+    console.log(data, 'client form data')
+    const response = await editNote(Number(noteId), data)
+    if (response.error) {
+      alert(response.error)
+    } else {
+      alert(response.success)
+      redirect('/')
+    }
   })
 
   return (

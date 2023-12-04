@@ -1,7 +1,5 @@
-// get note here and pass props to client form
 import { getNote } from '@/actions/get-note'
 import EditNoteForm from './edit-note-form'
-import { Note } from '@prisma/client'
 import { redirect } from 'next/navigation'
 
 const EditNote = async ({ params }: { params: { id: string } }) => {
@@ -11,9 +9,9 @@ const EditNote = async ({ params }: { params: { id: string } }) => {
     redirect('/')
   }
 
-  const note = response.note as Note
+  const note = response.note
 
-  return <EditNoteForm note={note} />
+  return note && <EditNoteForm note={note} noteId={params.id} />
 }
 
 export default EditNote

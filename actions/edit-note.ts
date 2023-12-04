@@ -1,18 +1,25 @@
 'use server'
 import db from '@/lib/db'
+import { revalidatePath } from 'next/cache'
 
-export async function editNote(id: number, data: any) {
-  console.log('edit note', id)
+type FormData = {
+  title: string
+  content: string
+}
+
+export async function editNote(noteId: number, formData: FormData) {
+  console.log('server edit note', noteId, formData)
   try {
-    const updateUser = await db.note.update({
+    const updateNote = await db.note.update({
       where: {
-        id,
+        id: noteId,
       },
-      data,
+      data: formData,
     })
-    // return { success: `Deleted note` }
+    revalidatePath('/')
+    return { success: `Successfully updated note ${updateNote.title}` }
   } catch (e) {
     console.error(e)
-    // return { error: 'Failed to delete note' }
+    return { error: 'Failed to update note' }
   }
 }
