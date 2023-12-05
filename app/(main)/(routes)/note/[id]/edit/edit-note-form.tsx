@@ -46,7 +46,6 @@ const EditNoteForm = ({ note, noteId }: EditNoteType) => {
   })
 
   const action: () => void = form.handleSubmit(async (data) => {
-    console.log(data, 'client form data')
     const response = await editNote(Number(noteId), data)
     if (response.error) {
       alert(response.error)

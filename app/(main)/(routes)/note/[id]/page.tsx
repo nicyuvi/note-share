@@ -2,7 +2,6 @@ import { getNote } from '@/actions/get-note'
 import type { Note } from '@prisma/client'
 
 const ViewNote = async ({ params }: { params: { id: string } }) => {
-  console.log('params id', typeof params.id)
   const response = await getNote(Number(params.id))
   if (response.error) {
     alert(response.error)

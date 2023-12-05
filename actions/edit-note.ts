@@ -8,7 +8,6 @@ type FormData = {
 }
 
 export async function editNote(noteId: number, formData: FormData) {
-  console.log('server edit note', noteId, formData)
   try {
     const updateNote = await db.note.update({
       where: {
