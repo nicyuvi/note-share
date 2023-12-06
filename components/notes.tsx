@@ -6,8 +6,6 @@ import { deleteNote } from '@/actions/delete-note'
 import { editNote } from '@/actions/edit-note'
 import { useRouter } from 'next/navigation'
 
-// TODO: server mutations -- edit
-
 const Notes = ({ notes, profile }: any) => {
   const { name } = profile
   const { push } = useRouter()
