@@ -16,16 +16,55 @@ model Profile {
   imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  notes     Note[]
+
+  notes   Note[]
+  servers Server[]
+  members Member[]
 }
 
 model Note {
   id        Int      @id @default(autoincrement())
-  authorId  String
   title     String
   content   String
   // published Boolean
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  author    Profile  @relation(fields: [authorId], references: [userId], onUpdate: NoAction, onDelete: NoAction)
+
+  authorId String
+  author   Profile @relation(fields: [authorId], references: [userId], onUpdate: NoAction, onDelete: NoAction)
+  serverId Int?
+  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+}
+
+model Server {
+  id         Int      @id @default(autoincrement())
+  inviteCode String   @default(uuid())
+  name       String
+  imageUrl   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  profileId Int
+  profile   Profile  @relation(fields: [profileId], references: [id], onUpdate: NoAction, onDelete: Cascade)
+  notes     Note[]
+  members   Member[]
+}
+
+enum MemberRole {
+  ADMIN
+  GUEST
+}
+
+model Member {
+  id   Int        @id @default(autoincrement())
+  role MemberRole @default(GUEST)
+
+  serverId Int?
+  Server   Server? @relation(fields: [serverId], references: [id])
+
+  profileId Int?
+  Profile   Profile? @relation(fields: [profileId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

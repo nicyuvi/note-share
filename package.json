@@ -1,5 +1,6 @@
 {
-  "name": "note-share",
+  "name": "NoteHub",
+  "description": "NoteHub: Share the Spark, Ignite the Notesphere!",
   "version": "0.1.0",
   "private": true,
   "scripts": {
