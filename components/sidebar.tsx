@@ -1,10 +1,14 @@
 import Link from 'next/link'
+import { getServers } from '@/actions/get/get-servers'
+import { Server } from '@prisma/client'
 
-// TODO: add servers to sidebar
-
-const Sidebar = () => {
-  // get servers
-  // loop and render server
+const Sidebar = async () => {
+  const response = await getServers()
+  if (response.error) {
+    alert(response.error)
+    return null
+  }
+  const servers = response.success as Server[]
 
   return (
     <aside className="bg-slate-500 mb-4">
@@ -18,6 +22,13 @@ const Sidebar = () => {
         <li>
           <Link href="/server/create">New Server</Link>
         </li>
+        {servers.map(({ id, name }) => {
+          return (
+            <li key={id}>
+              <Link href={`/server/${id}`}>{name}</Link>
+            </li>
+          )
+        })}
       </ul>
     </aside>
   )
