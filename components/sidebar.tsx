@@ -1,6 +1,11 @@
 import Link from 'next/link'
 
+// TODO: add servers to sidebar
+
 const Sidebar = () => {
+  // get servers
+  // loop and render server
+
   return (
     <aside className="bg-slate-500 mb-4">
       <ul>

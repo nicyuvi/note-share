@@ -1,3 +1,4 @@
+// db.server.create data: {profileId, name, members: {create: {profileId, role: MemberRole.ADMIN, }}}
 'use client'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,31 +14,24 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { createServer } from '@/actions/create/create-server'
 import { redirect } from 'next/navigation'
-import { createNote } from '@/actions/create/create-note'
 
-const CreateNote = () => {
+const CreateServer = () => {
   const formSchema = z.object({
-    title: z.string().min(1).max(50),
-    content: z
-      .string()
-      .min(1, {
-        message: 'Content cannot be empty.',
-      })
-      .max(255, {
-        message: 'Content must not be longer than 255 characters.',
-      }),
+    name: z.string().min(1).max(50),
+    imageUrl: z.string(),
   })
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
-      content: '',
+      name: '',
+      imageUrl: '',
     },
   })
 
   const action: () => void = form.handleSubmit(async (data) => {
-    const response = await createNote(data)
+    const response = await createServer(data)
     if (response.error) {
       alert(response.error)
     } else {
@@ -52,10 +46,10 @@ const CreateNote = () => {
         <form action={action} className="space-y-8 w-64">
           <FormField
             control={form.control}
-            name="title"
+            name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel>Server Name</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -65,12 +59,12 @@ const CreateNote = () => {
           />
           <FormField
             control={form.control}
-            name="content"
+            name="imageUrl"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content</FormLabel>
+                <FormLabel>Image URL</FormLabel>
                 <FormControl>
-                  <Textarea className="resize-none" {...field} />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -83,4 +77,4 @@ const CreateNote = () => {
   )
 }
 
-export default CreateNote
+export default CreateServer

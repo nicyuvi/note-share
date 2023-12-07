@@ -1,4 +1,4 @@
-import { getNote } from '@/actions/get-note'
+import { getNote } from '@/actions/get/get-note'
 import EditNoteForm from './edit-note-form'
 import { redirect } from 'next/navigation'
 

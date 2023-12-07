@@ -1,4 +1,4 @@
-import { getProfile } from '@/lib/utils'
+import { getProfile } from '@/actions/get/get-profile'
 import type { Profile } from '@prisma/client'
 
 const Profile = async () => {

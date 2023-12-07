@@ -1,4 +1,4 @@
-import { getNote } from '@/actions/get-note'
+import { getNote } from '@/actions/get/get-note'
 import type { Note } from '@prisma/client'
 
 const ViewNote = async ({ params }: { params: { id: string } }) => {

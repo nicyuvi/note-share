@@ -3,7 +3,13 @@ import db from '@/lib/db'
 import { auth } from '@clerk/nextjs'
 import * as z from 'zod'
 
-export async function createProfile(formData: any) {
+type FormData = {
+  name: string
+  bio: string
+  imageUrl?: string
+}
+
+export async function createProfile(formData: FormData) {
   const { userId } = auth()
   const { name, bio, imageUrl } = formData
   const schema = z.object({
