@@ -37,9 +37,8 @@ export async function createNote(formData: FormData) {
       data,
     })
     revalidatePath('/')
-    return { success: `Created note ${data.title}` }
+    return { success: `Created note: ${data.title}` }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to create note' }
   }
 }

@@ -10,7 +10,6 @@ export async function getNote(id: number) {
     })
     return { note }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to get note' }
   }
 }

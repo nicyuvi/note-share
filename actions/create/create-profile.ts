@@ -40,7 +40,6 @@ export async function createProfile(formData: FormData) {
     })
     return { success: `Created profile ${data.name}` }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to create profile' }
   }
 }

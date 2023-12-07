@@ -10,8 +10,8 @@ export async function getProfile() {
         userId: userId as string,
       },
     })
-    return profile
+    return { success: profile }
   } catch (e) {
-    console.error(e)
+    return { error: 'Failed to get profile' }
   }
 }

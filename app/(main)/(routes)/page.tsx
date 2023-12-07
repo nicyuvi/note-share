@@ -5,13 +5,21 @@ import { getProfile } from '@/actions/get/get-profile'
 import { getNotes } from '@/actions/get/get-notes'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { Note, Profile } from '@prisma/client'
 
 const Home = async () => {
-  const profile = await getProfile()
-  const notes = await getNotes()
-  if (!profile) {
+  const responseProfile = await getProfile()
+  const responseNotes = await getNotes()
+  if (responseNotes.error) {
+    alert(responseProfile.error)
+  }
+  if (responseProfile.error) {
+    alert(responseProfile.error)
     redirect('/profile/create')
   }
+
+  const notes = responseNotes.success as Note[]
+  const profile = responseProfile.success as Profile
 
   return (
     <>

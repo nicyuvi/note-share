@@ -12,7 +12,6 @@ export async function deleteNote(id: number) {
     revalidatePath('/')
     return { success: `Deleted note` }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to delete note' }
   }
 }

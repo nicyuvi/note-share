@@ -18,7 +18,6 @@ export async function editNote(noteId: number, formData: FormData) {
     revalidatePath('/')
     return { success: `Successfully updated note ${updateNote.title}` }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to update note' }
   }
 }

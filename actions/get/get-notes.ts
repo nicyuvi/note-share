@@ -4,9 +4,8 @@ import db from '@/lib/db'
 export async function getNotes() {
   try {
     const notes = await db.note.findMany()
-    return notes
+    return { success: notes }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to get notes' }
   }
 }

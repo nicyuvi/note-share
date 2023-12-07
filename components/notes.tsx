@@ -1,12 +1,16 @@
 'use client'
 import Link from 'next/link'
-import type { Note } from '@prisma/client'
+import type { Note, Profile } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { deleteNote } from '@/actions/delete-note'
-import { editNote } from '@/actions/edit-note'
 import { useRouter } from 'next/navigation'
 
-const Notes = ({ notes, profile }: any) => {
+type NotesType = {
+  notes: Note[]
+  profile: Profile
+}
+
+const Notes = ({ notes, profile }: NotesType) => {
   const { name } = profile
   const { push } = useRouter()
 

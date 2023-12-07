@@ -13,7 +13,11 @@ type FormData = {
 const MEMBER_ROLE = ['ADMIN', 'GUEST'] as const
 
 export async function createServer(formData: FormData) {
-  const profile = await getProfile()
+  const response = await getProfile()
+  if (response.error) {
+    return { error: response.error }
+  }
+  const profile = response.success
   const { name, imageUrl } = formData
 
   const schema = z.object({
@@ -55,7 +59,6 @@ export async function createServer(formData: FormData) {
     revalidatePath('/')
     return { success: `Created server: ${data.name}` }
   } catch (e) {
-    console.error(e)
     return { error: 'Failed to create server' }
   }
 }
