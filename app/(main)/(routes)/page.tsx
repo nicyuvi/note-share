@@ -6,22 +6,17 @@ import { getNotes } from '@/actions/get/get-notes'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Note, Profile } from '@prisma/client'
+import { handlePromiseAllReject } from '@/lib/utils'
 
 // TODO: add note to server button
 
 const Home = async () => {
-  const responseProfile = await getProfile()
-  const responseNotes = await getNotes()
-  if (responseNotes.error) {
-    alert(responseProfile.error)
-  }
-  if (responseProfile.error) {
-    alert(responseProfile.error)
-    redirect('/profile/create')
-  }
+  let res = await Promise.all([getProfile(), getNotes()])
+  if (res[0].error) redirect('/profile/create')
+  handlePromiseAllReject(res)
 
-  const notes = responseNotes.success as Note[]
-  const profile = responseProfile.success as Profile
+  const profile = res[0].success as Profile
+  const notes = res[1].success as Note[]
 
   return (
     <>
