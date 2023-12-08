@@ -5,21 +5,20 @@ import { getNotesServer } from '@/actions/get/get-notes-server'
 
 // TODO: add note from collection button
 
-// ? refactor with promise.all
 const ServerView = async ({ params }: { params: { id: string } }) => {
-  const response = await getServer(Number(params.id))
-  const notesResponse = await getNotesServer(Number(params.id))
+  let res = await Promise.all([
+    getServer(Number(params.id)),
+    getNotesServer(Number(params.id as any)),
+  ])
 
-  if (notesResponse.error) {
-    alert(notesResponse.error)
-    return notFound()
-  } else if (response.error) {
-    alert(response.error)
-    return notFound()
+  for (let i = 0; i < res.length; i++) {
+    if (res[i].error) {
+      return notFound()
+    }
   }
 
-  const server = response.success as Server
-  const notes = notesResponse.success as Note[]
+  const server = res[0].success as Server
+  const notes = res[1].success as Note[]
 
   return (
     <>
