@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Note, Profile } from '@prisma/client'
 
+// TODO: add note to server button
+
 const Home = async () => {
   const responseProfile = await getProfile()
   const responseNotes = await getNotes()

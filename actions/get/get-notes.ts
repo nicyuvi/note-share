@@ -1,6 +1,7 @@
 'use server'
 import db from '@/lib/db'
 
+// TODO: get notes related to current user
 export async function getNotes() {
   try {
     const notes = await db.note.findMany()
