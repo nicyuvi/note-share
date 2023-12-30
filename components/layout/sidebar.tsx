@@ -1,13 +1,11 @@
 import Link from 'next/link'
 import { getServers } from '@/actions/get/get-servers'
 import { Server } from '@prisma/client'
+import { notFound } from 'next/navigation'
 
 const Sidebar = async () => {
   const response = await getServers()
-  if (response.error) {
-    alert(response.error)
-    return null
-  }
+  if (response.error) notFound()
   const servers = response.success as Server[]
 
   return (
