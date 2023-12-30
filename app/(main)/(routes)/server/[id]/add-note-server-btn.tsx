@@ -1,3 +1,4 @@
+'use client'
 import {
   Dialog,
   DialogContent,
@@ -8,6 +9,7 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import { useState, useEffect } from 'react'
 
 // opens modal with list of notes from my collection
 // modal -> useBoolean()
@@ -16,7 +18,16 @@ import { Button } from '@/components/ui/button'
 // select one or multiple notes
 // add btn --> update notes to relate to current server
 
+// pass notes as props
 const AddNoteToServer = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false)
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
   return (
     <Dialog>
       <DialogTrigger>
