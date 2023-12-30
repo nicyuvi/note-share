@@ -1,8 +1,10 @@
 'use client'
 import { Button } from './ui/button'
 
-// update getNotes to filter notes from current user
 // opens modal with list of notes from my collection
+// modal -> useBoolean()
+// components/providers onMount check
+
 // select one or multiple notes
 // add btn --> update notes to relate to current server
 

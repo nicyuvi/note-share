@@ -9,9 +9,8 @@ import { handlePromiseAllReject } from '@/lib/utils'
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
     getServer(Number(params.id)),
-    getNotesServer(Number(params.id as any)),
+    getNotesServer(Number(params.id)),
   ])
-  console.log('res', res)
   handlePromiseAllReject(res)
 
   const server = res[0].success as Server
