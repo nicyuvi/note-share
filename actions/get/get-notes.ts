@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs'
 
 export async function getNotes() {
   const { userId } = auth()
-  if (!userId) return { error: 'Failed to get current user' }
+  if (!userId) throw new Error()
 
   try {
     const notes = await db.note.findMany({

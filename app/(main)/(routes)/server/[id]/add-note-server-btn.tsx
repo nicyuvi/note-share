@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
+import { Note } from '@prisma/client'
 
 // opens modal with list of notes from my collection
 // modal -> useBoolean()
@@ -19,7 +20,7 @@ import { useState, useEffect } from 'react'
 // add btn --> update notes to relate to current server
 
 // pass notes as props
-const AddNoteToServer = () => {
+const AddNoteToServer = ({ notes }: { notes: Note[] }) => {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   useEffect(() => {
     setIsMounted(true)
@@ -35,15 +36,19 @@ const AddNoteToServer = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
+          <DialogTitle>Add note to this server</DialogTitle>
         </DialogHeader>
-        <div>list notes from collection</div>
+        <div className="max-h-48 overflow-y-scroll">
+          {notes.map(({ id, title }) => {
+            return (
+              <div key={id} className="border border-current p-4 mb-4">
+                <p>{title}</p>
+              </div>
+            )
+          })}
+        </div>
         <DialogFooter>
-          <Button>Save changes</Button>
+          <Button>Add note</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
