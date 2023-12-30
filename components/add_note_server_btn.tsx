@@ -1,5 +1,13 @@
-'use client'
-import { Button } from './ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
 
 // opens modal with list of notes from my collection
 // modal -> useBoolean()
@@ -10,14 +18,24 @@ import { Button } from './ui/button'
 
 const AddNoteToServer = () => {
   return (
-    <Button
-      size="sm"
-      onClick={() => {
-        console.log('open modal')
-      }}
-    >
-      Add note from collection
-    </Button>
+    <Dialog>
+      <DialogTrigger className="border border-sky-500">
+        <Button>Add note</Button>
+      </DialogTrigger>
+      <DialogContent className="border border-sky-500">
+        <DialogHeader className="border border-sky-500">
+          <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This will permanently delete your
+            account and remove your data from our servers.
+          </DialogDescription>
+        </DialogHeader>
+        <div>list notes from collection</div>
+        <DialogFooter>
+          <Button>Save changes</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 

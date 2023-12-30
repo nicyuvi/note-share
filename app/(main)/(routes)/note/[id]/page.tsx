@@ -1,6 +1,7 @@
 import { getNote } from '@/actions/get/get-note'
 import type { Note } from '@prisma/client'
-import EditNoteBtn from '@/components/edit_note_btn'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 
 type ViewNoteProps = {
   params: { id: string }
@@ -19,7 +20,11 @@ const ViewNote = async ({ params }: ViewNoteProps) => {
       <div>{title}</div>
       <div>{content}</div>
       <div>{authorId}</div>
-      <EditNoteBtn noteId={noteId} />
+      <Link href={`/note/${noteId}/edit`}>
+        <Button variant="outline" className="mb-4">
+          Edit
+        </Button>
+      </Link>
     </>
   )
 }
