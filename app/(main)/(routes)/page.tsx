@@ -1,6 +1,6 @@
 import { UserButton } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
-import Notes from '@/components/notes'
+import Notes from './notes'
 import { getProfile } from '@/actions/get/get-profile'
 import { getNotes } from '@/actions/get/get-notes'
 import { Button } from '@/components/ui/button'

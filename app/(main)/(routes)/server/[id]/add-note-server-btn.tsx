@@ -19,11 +19,11 @@ import { Button } from '@/components/ui/button'
 const AddNoteToServer = () => {
   return (
     <Dialog>
-      <DialogTrigger className="border border-sky-500">
+      <DialogTrigger>
         <Button>Add note</Button>
       </DialogTrigger>
-      <DialogContent className="border border-sky-500">
-        <DialogHeader className="border border-sky-500">
+      <DialogContent>
+        <DialogHeader>
           <DialogTitle>Are you sure absolutely sure?</DialogTitle>
           <DialogDescription>
             This action cannot be undone. This will permanently delete your

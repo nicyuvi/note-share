@@ -1,5 +1,5 @@
 import { getNote } from '@/actions/get/get-note'
-import EditNoteForm from './edit_note_form'
+import EditNoteForm from './edit-note-form'
 import { redirect } from 'next/navigation'
 
 const EditNote = async ({ params }: { params: { id: string } }) => {

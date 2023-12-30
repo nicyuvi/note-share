@@ -1,7 +1,7 @@
 import { getServer } from '@/actions/get/get-server'
 import { Note, Server } from '@prisma/client'
 import { getNotesServer } from '@/actions/get/get-notes-server'
-import AddNoteToServer from '@/components/add_note_server_btn'
+import AddNoteToServer from './add-note-server-btn'
 import { handlePromiseAllReject } from '@/lib/utils'
 
 // TODO: add note from collection button
