@@ -30,7 +30,7 @@ const AddNoteToServer = () => {
   }
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         <Button>Add note</Button>
       </DialogTrigger>
       <DialogContent>
