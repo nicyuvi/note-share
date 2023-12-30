@@ -35,11 +35,11 @@ const Notes = ({ notes, profile }: NotesType) => {
                 <p>{name}</p>
               </div>
               <Button
-                onClick={() => push(`/note/${id}/edit`)}
+                onClick={() => push(`/note/${id}`)}
                 variant="secondary"
                 className="mr-4"
               >
-                edit
+                view
               </Button>
               <Button onClick={() => handleDelete(id)} variant="destructive">
                 delete

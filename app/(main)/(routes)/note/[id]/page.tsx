@@ -1,8 +1,14 @@
 import { getNote } from '@/actions/get/get-note'
 import type { Note } from '@prisma/client'
+import EditNoteBtn from '@/components/edit_note_btn'
 
-const ViewNote = async ({ params }: { params: { id: string } }) => {
-  const response = await getNote(Number(params.id))
+type ViewNoteProps = {
+  params: { id: string }
+}
+
+const ViewNote = async ({ params }: ViewNoteProps) => {
+  const noteId = params.id
+  const response = await getNote(Number(noteId))
   if (response.error) {
     alert(response.error)
   }
@@ -13,6 +19,7 @@ const ViewNote = async ({ params }: { params: { id: string } }) => {
       <div>{title}</div>
       <div>{content}</div>
       <div>{authorId}</div>
+      <EditNoteBtn noteId={noteId} />
     </>
   )
 }

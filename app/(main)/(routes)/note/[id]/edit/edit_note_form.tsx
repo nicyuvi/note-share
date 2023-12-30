@@ -51,7 +51,7 @@ const EditNoteForm = ({ note, noteId }: EditNoteType) => {
       alert(response.error)
     } else {
       alert(response.success)
-      redirect('/')
+      redirect(`/note/${noteId}`)
     }
   })
 
