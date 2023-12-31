@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { Note } from '@prisma/client'
-import { addNoteToServer } from '@/actions/update/add-note-server'
+import { updateNoteInServer } from '@/actions/update/update-note-server'
 
 type AddNoteToServerModalProps = {
   notes: Note[]
@@ -29,11 +29,10 @@ const AddNoteToServerModal = ({
   }, [])
 
   // TODO: add classNames lib
-  // TODO: filter notes list for already in server
 
   async function handleClick() {
     if (!noteId) return null
-    const response = await addNoteToServer(noteId, { serverId })
+    const response = await updateNoteInServer(noteId, { serverId })
     if (response.error) {
       throw new Error(response.error)
     } else {

@@ -4,8 +4,7 @@ import { getNotesServer } from '@/actions/get/get-notes-server'
 import { getNotes } from '@/actions/get/get-notes'
 import AddNoteToServerModal from './add-note-server-btn'
 import { handlePromiseAllReject } from '@/lib/utils'
-
-// export const revalidate = 0
+import RemoveNoteBtn from './remove-note-server-btn'
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
@@ -29,11 +28,15 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
       {serverNotes.length > 0 ? (
         serverNotes.map(({ id, title, content }: Note) => {
           return (
-            <div key={id} className="bg-blue-100 mb-4">
+            <div
+              key={id}
+              className="bg-blue-100 mb-4 flex justify-between items-center"
+            >
               <div>
                 <p>{title}</p>
                 <p>{content}</p>
               </div>
+              <RemoveNoteBtn noteId={id} />
             </div>
           )
         })

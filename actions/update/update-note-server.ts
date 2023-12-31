@@ -1,11 +1,10 @@
 'use server'
 import db from '@/lib/db'
-import { revalidatePath } from 'next/cache'
 import { Prisma } from '@prisma/client'
 
-export async function addNoteToServer(
+export async function updateNoteInServer(
   noteId: number,
-  data: { serverId: number }
+  data: { serverId: number | null }
 ) {
   try {
     const updateNote = await db.note.update({
@@ -14,7 +13,11 @@ export async function addNoteToServer(
       },
       data,
     })
-    return { success: `Successfully added note ${updateNote.title}` }
+    if (data.serverId === null) {
+      return { success: `Successfully removed note ${updateNote.title}` }
+    } else {
+      return { success: `Successfully added note ${updateNote.title}` }
+    }
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // https://www.prisma.io/docs/orm/prisma-client/debugging-and-troubleshooting/handling-exceptions-and-errors
