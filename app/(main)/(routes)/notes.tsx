@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import type { Note, Profile } from '@prisma/client'
 import { Button } from '@/components/ui/button'
-import { deleteNote } from '@/actions/delete-note'
+import { deleteNote } from '@/actions/delete/delete-note'
 import { useRouter } from 'next/navigation'
 
 type NotesType = {

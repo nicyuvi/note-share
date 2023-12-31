@@ -14,7 +14,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { redirect } from 'next/navigation'
-import { editNote } from '@/actions/edit-note'
+import { editNote } from '@/actions/update/edit-note'
 import { Note } from '@prisma/client'
 
 const formSchema = z.object({

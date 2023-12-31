@@ -2,8 +2,10 @@ import { getServer } from '@/actions/get/get-server'
 import { Note, Server } from '@prisma/client'
 import { getNotesServer } from '@/actions/get/get-notes-server'
 import { getNotes } from '@/actions/get/get-notes'
-import AddNoteToServer from './add-note-server-btn'
+import AddNoteToServerModal from './add-note-server-btn'
 import { handlePromiseAllReject } from '@/lib/utils'
+
+// export const revalidate = 0
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
@@ -21,7 +23,7 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
     <>
       <div className="flex justify-between items-center mb-6">
         <h1>{server.name}</h1>
-        <AddNoteToServer notes={allNotes} />
+        <AddNoteToServerModal serverId={server.id} notes={allNotes} />
       </div>
       <hr />
       {serverNotes.length > 0 ? (
