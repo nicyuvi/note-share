@@ -1,6 +1,7 @@
 'use server'
 import db from '@/lib/db'
 import { Prisma } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 
 export async function updateNoteInServer(
   noteId: number,
@@ -13,6 +14,7 @@ export async function updateNoteInServer(
       },
       data,
     })
+    revalidatePath(`/server/${data.serverId}`)
     if (data.serverId === null) {
       return { success: `Successfully removed note ${updateNote.title}` }
     } else {
