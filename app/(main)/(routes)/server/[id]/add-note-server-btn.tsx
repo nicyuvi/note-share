@@ -55,19 +55,21 @@ const AddNoteToServerModal = ({
           <DialogTitle>Add note to this server</DialogTitle>
         </DialogHeader>
         <div className="max-h-48 overflow-y-scroll">
-          {notes.map(({ id, title }) => {
-            return (
-              <div
-                key={id}
-                className={`border border-current p-4 mb-4 ${
-                  noteId === id ? 'border-2 border-red-500' : ''
-                }`}
-                onClick={() => setNoteId(id)}
-              >
-                <p>{title}</p>
-              </div>
-            )
-          })}
+          {notes
+            .filter((note) => note.serverId !== serverId)
+            .map(({ id, title }) => {
+              return (
+                <div
+                  key={id}
+                  className={`border border-current p-4 mb-4 ${
+                    noteId === id ? 'border-2 border-red-500' : ''
+                  }`}
+                  onClick={() => setNoteId(id)}
+                >
+                  <p>{title}</p>
+                </div>
+              )
+            })}
         </div>
         <DialogFooter>
           <Button onClick={() => handleClick()}>Add note</Button>
