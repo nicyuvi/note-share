@@ -11,6 +11,9 @@ import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { Note } from '@prisma/client'
 import { updateNoteInServer } from '@/actions/update/update-note-server'
+import { withHydrationError } from '@/lib/hoc'
+
+// TODO: add classNames lib
 
 type AddNoteToServerModalProps = {
   notes: Note[]
@@ -22,13 +25,7 @@ const AddNoteToServerModal = ({
   serverId,
 }: AddNoteToServerModalProps) => {
   const [open, setOpen] = useState(false)
-  const [isMounted, setIsMounted] = useState<boolean>(false)
   const [noteId, setNoteId] = useState<number | null>(null)
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  // TODO: add classNames lib
 
   async function handleClick() {
     if (!noteId) return null
@@ -41,9 +38,6 @@ const AddNoteToServerModal = ({
     }
   }
 
-  if (!isMounted) {
-    return null
-  }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -71,11 +65,11 @@ const AddNoteToServerModal = ({
             })}
         </div>
         <DialogFooter>
-          <Button onClick={() => handleClick()}>Add note</Button>
+          <Button onClick={handleClick}>Add note</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   )
 }
 
-export default AddNoteToServerModal
+export default withHydrationError(AddNoteToServerModal)
