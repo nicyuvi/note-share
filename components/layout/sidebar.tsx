@@ -9,7 +9,7 @@ const Sidebar = async () => {
   const servers = response.success as Server[]
 
   return (
-    <nav className="container bg-slate-500 mb-4">
+    <nav className="bg-slate-500 mb-4">
       <ul>
         <li>
           <Link href="/">Home</Link>
