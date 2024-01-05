@@ -7,7 +7,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <section className="bg-slate-400 min-h-screen">
+    <section className="bg-red-400 min-h-screen">
       <MainNav />
       <Sidebar />
       {children}
