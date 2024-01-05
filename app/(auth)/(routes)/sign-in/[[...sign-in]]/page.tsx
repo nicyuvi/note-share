@@ -1,7 +1,7 @@
-import { SignIn as SignInComponent } from "@clerk/nextjs";
+import { SignIn as SignInComponent } from '@clerk/nextjs'
 
 const SignIn = () => {
-  return <SignInComponent />;
-};
+  return <SignInComponent />
+}
 
-export default SignIn;
+export default SignIn
