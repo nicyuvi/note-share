@@ -18,7 +18,9 @@ export default async function DashboardLayout({
       <MainNav />
       <div className="flex h-full min-h-0">
         <Sidebar servers={servers} />
-        <main className="overflow-y-auto">{children}</main>
+        <main className="w-full overflow-y-auto border border-red-500 px-4 pt-4">
+          {children}
+        </main>
       </div>
     </section>
   )

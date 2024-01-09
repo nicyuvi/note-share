@@ -7,8 +7,6 @@ import Link from 'next/link'
 import { Note, Profile } from '@prisma/client'
 import { handlePromiseAllReject } from '@/lib/utils'
 
-// TODO: add note to server button
-
 const Home = async () => {
   let res = await Promise.all([getProfile(), getNotes()])
   if (res[0].error) redirect('/profile/create')
@@ -19,12 +17,16 @@ const Home = async () => {
 
   return (
     <>
-      <Link href="/note/create">
-        <Button variant="outline" className="mb-4">
-          Create Note
-        </Button>
-      </Link>
-      <Notes profile={profile} notes={notes} />
+      <div className="flex justify-end">
+        <Link href="/note/create">
+          <Button variant="outline" className="mb-4">
+            Create Note
+          </Button>
+        </Link>
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <Notes profile={profile} notes={notes} />
+      </div>
     </>
   )
 }

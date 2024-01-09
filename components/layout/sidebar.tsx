@@ -4,7 +4,7 @@ import { Server } from '@prisma/client'
 import { Separator } from '@/components/ui/separator'
 import CustomTooltip from './custom-tooltip'
 import SidebarIcon from './sidebar-icon'
-import { UserRound, Plus, Route } from 'lucide-react'
+import { UserRound, Plus } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 
 const ROUTE = {
