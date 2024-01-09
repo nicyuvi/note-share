@@ -13,13 +13,13 @@ const Sidebar = async () => {
   const servers = response.success as Server[]
 
   return (
-    <nav className="bg-hub-500">
+    <nav className="bg-hub-500 px-2 py-4">
       <div className="flex h-full flex-col justify-between">
         <ul className="flex flex-col items-center">
           <li>
             <Link href="/">
               <CustomTooltip content="Collection">
-                <SidebarIcon>
+                <SidebarIcon classes="mb-2">
                   <p>C</p>
                 </SidebarIcon>
               </CustomTooltip>
@@ -29,7 +29,7 @@ const Sidebar = async () => {
           <li>
             <Link href="/server/create">
               <CustomTooltip content="Create Server">
-                <SidebarIcon>
+                <SidebarIcon classes="mb-2">
                   <Plus />
                 </SidebarIcon>
               </CustomTooltip>
@@ -40,7 +40,7 @@ const Sidebar = async () => {
               <li key={id}>
                 <Link href={`/server/${id}`}>
                   <CustomTooltip content={name}>
-                    <SidebarIcon>
+                    <SidebarIcon classes="mb-2">
                       <p>{name.split('')[0].toUpperCase()}</p>
                     </SidebarIcon>
                   </CustomTooltip>
