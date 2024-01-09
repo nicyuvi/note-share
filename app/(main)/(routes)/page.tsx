@@ -1,4 +1,3 @@
-import { UserButton } from '@clerk/nextjs'
 import { redirect } from 'next/navigation'
 import Notes from './notes'
 import { getProfile } from '@/actions/get/get-profile'
@@ -26,7 +25,6 @@ const Home = async () => {
         </Button>
       </Link>
       <Notes profile={profile} notes={notes} />
-      <UserButton afterSignOutUrl="/" />
     </>
   )
 }

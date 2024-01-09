@@ -9,25 +9,37 @@ const Sidebar = async () => {
   const servers = response.success as Server[]
 
   return (
-    <nav className="bg-slate-500 mb-4">
-      <ul>
-        <li>
-          <Link href="/">Home</Link>
-        </li>
-        <li>
-          <Link href="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link href="/server/create">New Server</Link>
-        </li>
-        {servers.map(({ id, name }) => {
-          return (
-            <li key={id}>
-              <Link href={`/server/${id}`}>{name}</Link>
-            </li>
-          )
-        })}
-      </ul>
+    <nav className="bg-hub-500">
+      <div className="flex h-full flex-col justify-between">
+        <ul className="flex flex-col items-center">
+          <li>
+            <Link href="/">
+              <div className="mb-2 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-hub-100 text-xl text-hub-500">
+                H
+              </div>
+            </Link>
+          </li>
+          <li>
+            <Link href="/server/create">
+              <div className="mb-2 flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-hub-100 text-xl text-hub-500">
+                N
+              </div>
+            </Link>
+          </li>
+          {servers.map(({ id, name }) => {
+            return (
+              <li key={id}>
+                <Link href={`/server/${id}`}>{name}</Link>
+              </li>
+            )
+          })}
+        </ul>
+        <Link href="/profile" className="flex justify-evenly">
+          <div className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-lg bg-hub-100 text-xl text-hub-500">
+            P
+          </div>
+        </Link>
+      </div>
     </nav>
   )
 }

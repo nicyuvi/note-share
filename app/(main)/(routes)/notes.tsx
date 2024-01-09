@@ -28,7 +28,7 @@ const Notes = ({ notes, profile }: NotesType) => {
       {notes.length > 0 ? (
         notes.map(({ id, title, content }: Note) => {
           return (
-            <div key={id} className="bg-blue-100 mb-4">
+            <div key={id} className="bg-hub-500 mb-4">
               <div onClick={() => push(`/note/${id}`)}>
                 <p>{title}</p>
                 <p>{content}</p>
