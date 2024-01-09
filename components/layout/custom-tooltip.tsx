@@ -16,7 +16,9 @@ const CustomTooltip = ({
   return (
     <TooltipProvider delayDuration={0}>
       <Tooltip>
-        <TooltipTrigger asChild>{children}</TooltipTrigger>
+        <TooltipTrigger asChild>
+          <div>{children}</div>
+        </TooltipTrigger>
         <TooltipContent side="right">
           <p>{content}</p>
           <TooltipArrow className="fill-black" />
