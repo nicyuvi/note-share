@@ -1,6 +1,6 @@
 const SidebarIcon = ({
   children,
-  classes,
+  classes = '',
 }: {
   children: React.ReactNode
   classes?: string

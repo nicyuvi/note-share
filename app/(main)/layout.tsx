@@ -11,7 +11,7 @@ export default function DashboardLayout({
       <MainNav />
       <div className="flex h-full min-h-0">
         <Sidebar />
-        <main className="overflow-y-scroll">{children}</main>
+        <main className="overflow-y-auto">{children}</main>
       </div>
     </section>
   )

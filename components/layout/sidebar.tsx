@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { Separator } from '@/components/ui/separator'
 import CustomTooltip from './custom-tooltip'
 import SidebarIcon from './sidebar-icon'
-import { Plus } from 'lucide-react'
+import { UserRound, Plus } from 'lucide-react'
 
 const Sidebar = async () => {
   const response = await getServers()
@@ -15,7 +15,7 @@ const Sidebar = async () => {
   return (
     <nav className="bg-hub-500 px-2 py-4">
       <div className="flex h-full flex-col justify-between">
-        <ul className="flex flex-col items-center">
+        <ul className="flex flex-col items-center overflow-y-auto">
           <li>
             <Link href="/">
               <CustomTooltip content="Collection">
@@ -40,7 +40,7 @@ const Sidebar = async () => {
               <li key={id}>
                 <Link href={`/server/${id}`}>
                   <CustomTooltip content={name}>
-                    <SidebarIcon classes="mb-2">
+                    <SidebarIcon classes="mb-4">
                       <p>{name.split('')[0].toUpperCase()}</p>
                     </SidebarIcon>
                   </CustomTooltip>
@@ -49,9 +49,10 @@ const Sidebar = async () => {
             )
           })}
         </ul>
+        <Separator className="my-2 h-[1.5px] bg-hub-600" />
         <Link href="/profile" className="flex justify-evenly">
           <SidebarIcon>
-            <p>P</p>
+            <UserRound color="#fff" />
           </SidebarIcon>
         </Link>
       </div>
