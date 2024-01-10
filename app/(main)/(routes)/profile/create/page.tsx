@@ -14,9 +14,10 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { createProfile } from '@/actions/create/create-profile'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const CreateProfile = () => {
+  const router = useRouter()
   const formSchema = z.object({
     name: z.string().min(1).max(50),
     bio: z
@@ -44,14 +45,14 @@ const CreateProfile = () => {
       alert(response.error)
     } else {
       alert(response.success)
-      redirect('/profile')
+      router.push('/')
     }
   })
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center justify-center">
       <Form {...form}>
-        <form action={action} className="space-y-8 w-64">
+        <form action={action} className="w-64 space-y-8">
           <FormField
             control={form.control}
             name="name"

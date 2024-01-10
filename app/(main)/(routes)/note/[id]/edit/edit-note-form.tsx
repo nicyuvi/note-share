@@ -13,9 +13,9 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { redirect } from 'next/navigation'
 import { editNote } from '@/actions/update/edit-note'
 import { Note } from '@prisma/client'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   title: z.string().min(1).max(50),
@@ -35,6 +35,7 @@ type EditNoteType = {
 }
 
 const EditNoteForm = ({ note, noteId }: EditNoteType) => {
+  const router = useRouter()
   const { title, content } = note
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,14 +52,14 @@ const EditNoteForm = ({ note, noteId }: EditNoteType) => {
       alert(response.error)
     } else {
       alert(response.success)
-      redirect(`/note/${noteId}`)
+      router.push(`/note/${noteId}`)
     }
   })
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center justify-center">
       <Form {...form}>
-        <form action={action} className="space-y-8 w-64">
+        <form action={action} className="w-64 space-y-8">
           <FormField
             control={form.control}
             name="title"

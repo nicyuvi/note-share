@@ -24,7 +24,7 @@ const Home = async () => {
           </Button>
         </Link>
       </div>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="mb-4 grid grid-cols-4 gap-4">
         <Notes profile={profile} notes={notes} />
       </div>
     </>
