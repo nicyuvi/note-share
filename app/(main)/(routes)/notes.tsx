@@ -1,9 +1,14 @@
-'use client'
 import Link from 'next/link'
 import type { Note, Profile } from '@prisma/client'
-import { Button } from '@/components/ui/button'
 import { deleteNote } from '@/actions/delete/delete-note'
-import { useRouter } from 'next/navigation'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 type NotesType = {
   notes: Note[]
@@ -12,8 +17,8 @@ type NotesType = {
 
 const Notes = ({ notes, profile }: NotesType) => {
   const { name } = profile
-  const { push } = useRouter()
 
+  // move to note/id page
   async function handleDelete(id: number) {
     const response = await deleteNote(id)
     if (response.error) {
@@ -23,27 +28,27 @@ const Notes = ({ notes, profile }: NotesType) => {
     }
   }
 
+  // todo: content preview
+
   return (
     <>
       {notes.length > 0 ? (
         notes.map(({ id, title, content }: Note) => {
           return (
-            <div key={id} className="bg-hub-500 mb-4">
-              <div onClick={() => push(`/note/${id}`)}>
-                <p>{title}</p>
-                <p>{content}</p>
-                <p>{name}</p>
-              </div>
-              <Button
-                onClick={() => push(`/note/${id}`)}
-                variant="secondary"
-                className="mr-4"
-              >
-                view
-              </Button>
-              <Button onClick={() => handleDelete(id)} variant="destructive">
-                delete
-              </Button>
+            <div key={id} className="grow cursor-pointer">
+              <Link href={`/note/${id}`}>
+                <Card className="min-h-full bg-hub-500">
+                  <CardHeader>
+                    <CardTitle>{title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{content}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <p>{name}</p>
+                  </CardFooter>
+                </Card>
+              </Link>
             </div>
           )
         })

@@ -19,7 +19,7 @@ const Home = async () => {
     <>
       <div className="flex justify-end">
         <Link href="/note/create">
-          <Button variant="outline" className="mb-4">
+          <Button variant="hub" className="mb-4">
             Create Note
           </Button>
         </Link>
