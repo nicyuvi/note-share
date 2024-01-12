@@ -1,11 +1,15 @@
 'use client'
 import Link from 'next/link'
+import { useState } from 'react'
 import { Server } from '@prisma/client'
 import { Separator } from '@/components/ui/separator'
 import CustomTooltip from './custom-tooltip'
 import SidebarIcon from './sidebar-icon'
 import { UserRound, Plus } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import { notFound } from 'next/navigation'
+import { getServers } from '@/actions/get/get-servers'
+import { useEffect } from 'react'
 
 const ROUTE = {
   home: '/',
@@ -14,8 +18,19 @@ const ROUTE = {
   profile: '/profile',
 }
 
-const Sidebar = ({ servers }: { servers: Server[] }) => {
+const Sidebar = () => {
   const pathname = usePathname()
+  const [servers, setServers] = useState<Server[]>()
+  useEffect(() => {
+    const getServersHandler = async () => {
+      const response = await getServers()
+      if (response.error) notFound()
+      const servers = response.success as Server[]
+      setServers(servers)
+    }
+    getServersHandler()
+  }, [])
+
   return (
     <nav className="bg-hub-500 px-2 py-4">
       <div className="flex h-full flex-col justify-between">
@@ -42,7 +57,7 @@ const Sidebar = ({ servers }: { servers: Server[] }) => {
               </CustomTooltip>
             </Link>
           </li>
-          {servers.map(({ id, name }) => {
+          {servers?.map(({ id, name }) => {
             return (
               <li key={id}>
                 <Link href={`${ROUTE.server}/${id}`}>
