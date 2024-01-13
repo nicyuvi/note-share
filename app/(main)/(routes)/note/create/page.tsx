@@ -48,7 +48,8 @@ const CreateNote = () => {
   })
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex h-full flex-col items-center justify-center text-hub-600">
+      <h1 className="mb-6 text-3xl font-bold text-hub-600">Create Note</h1>
       <Form {...form}>
         <form action={action} className="w-64 space-y-8">
           <FormField
@@ -77,7 +78,9 @@ const CreateNote = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button variant="hub" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
