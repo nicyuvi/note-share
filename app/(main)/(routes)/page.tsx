@@ -6,13 +6,13 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Note, Profile } from '@prisma/client'
 import { handlePromiseAllReject } from '@/lib/utils'
+import { PRISMA_ERRORS } from '@/lib/constants'
 
 const Home = async () => {
   let res = await Promise.all([getProfile(), getNotes()])
-  if (res[0].error) redirect('/profile/create')
+  if (res[0].error === PRISMA_ERRORS.P2025.name) redirect('/profile/create')
   handlePromiseAllReject(res)
 
-  const profile = res[0].success as Profile
   const notes = res[1].success as Note[]
 
   return (
@@ -25,7 +25,7 @@ const Home = async () => {
         </Link>
       </div>
       <div className="grid grid-cols-4 gap-4">
-        <Notes profile={profile} notes={notes} />
+        <Notes notes={notes} />
       </div>
     </>
   )

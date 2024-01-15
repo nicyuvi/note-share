@@ -20,21 +20,22 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-6">
-        <h1>{server.name}</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-bold text-hub-600">{server.name}</h1>
         <AddNoteToServerModal serverId={server.id} notes={allNotes} />
       </div>
       <hr />
       {serverNotes.length > 0 ? (
-        serverNotes.map(({ id, title, content }: Note) => {
+        serverNotes.map(({ id, title, content, authorName }: Note) => {
           return (
             <div
               key={id}
-              className="bg-blue-100 mb-4 flex justify-between items-center"
+              className="mb-4 flex items-center justify-between bg-blue-100"
             >
               <div>
                 <p>{title}</p>
                 <p>{content}</p>
+                <p>{authorName}</p>
               </div>
               <RemoveNoteBtn noteId={id} />
             </div>

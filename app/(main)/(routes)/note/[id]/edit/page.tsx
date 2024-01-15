@@ -10,7 +10,7 @@ const EditNote = async ({ params }: { params: { id: string } }) => {
     redirect('/')
   }
 
-  const note = response.note
+  const note = response.success
 
   return note && <EditNoteForm note={note} noteId={noteId} />
 }

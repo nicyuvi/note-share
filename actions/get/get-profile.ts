@@ -2,6 +2,7 @@
 import db from '@/lib/db'
 import { auth } from '@clerk/nextjs'
 import { Prisma } from '@prisma/client'
+import { PRISMA_ERRORS } from '@/lib/constants'
 
 const ERROR_MESSAGE = 'Failed to get profile'
 
@@ -9,7 +10,7 @@ export async function getProfile() {
   try {
     const { userId } = auth()
     if (userId === null) throw new Error()
-    const profile = await db.profile.findUnique({
+    const profile = await db.profile.findUniqueOrThrow({
       where: {
         userId,
       },
@@ -17,10 +18,11 @@ export async function getProfile() {
     return { success: profile }
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
-      // https://www.prisma.io/docs/orm/prisma-client/debugging-and-troubleshooting/handling-exceptions-and-errors
-      console.log(e.code)
+      if (e.code === PRISMA_ERRORS.P2025.name) {
+        console.log(PRISMA_ERRORS.P2025.message)
+        return { error: e.code }
+      }
     }
-    // console.log('hello me', e)
     return { error: ERROR_MESSAGE }
   }
 }

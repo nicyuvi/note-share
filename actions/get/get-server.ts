@@ -10,6 +10,6 @@ export async function getServer(id: number) {
     })
     return { success: server }
   } catch (e) {
-    return { error: 'Failed to get profile' }
+    return { error: 'Failed to get server' }
   }
 }

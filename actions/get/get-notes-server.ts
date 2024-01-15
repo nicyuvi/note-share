@@ -3,13 +3,13 @@ import db from '@/lib/db'
 
 export async function getNotesServer(serverId: number) {
   try {
-    const servers = await db.note.findMany({
+    const notes = await db.note.findMany({
       where: {
         serverId,
       },
     })
-    return { success: servers }
+    return { success: notes }
   } catch (e) {
-    return { error: 'Failed to get servers' }
+    return { error: 'Failed to get notes' }
   }
 }

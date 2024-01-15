@@ -21,6 +21,7 @@ export async function getServers() {
         },
       },
     })
+    console.log('servers', servers)
     return { success: servers }
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {

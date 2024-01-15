@@ -1,39 +1,21 @@
 import Link from 'next/link'
-import type { Note, Profile } from '@prisma/client'
-import { deleteNote } from '@/actions/delete/delete-note'
+import type { Note } from '@prisma/client'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 
-type NotesType = {
-  notes: Note[]
-  profile: Profile
-}
+// TODO: content preview
 
-const Notes = ({ notes, profile }: NotesType) => {
-  const { name } = profile
-
-  // move to note/id page
-  async function handleDelete(id: number) {
-    const response = await deleteNote(id)
-    if (response.error) {
-      alert(response.error)
-    } else {
-      alert(response.success)
-    }
-  }
-
-  // todo: content preview
-
+const Notes = ({ notes }: { notes: Note[] }) => {
   return (
     <>
       {notes.length > 0 ? (
-        notes.map(({ id, title, content }: Note) => {
+        notes.map(({ id, title, content, authorName }: Note) => {
           return (
             <div key={id} className="grow cursor-pointer">
               <Link href={`/note/${id}`}>
@@ -45,7 +27,7 @@ const Notes = ({ notes, profile }: NotesType) => {
                     <p>{content}</p>
                   </CardContent>
                   <CardFooter>
-                    <p>{name}</p>
+                    <p>{authorName}</p>
                   </CardFooter>
                 </Card>
               </Link>
@@ -53,7 +35,11 @@ const Notes = ({ notes, profile }: NotesType) => {
           )
         })
       ) : (
-        <Link href="/note/create">Create New Note</Link>
+        <Link href="/note/create">
+          <p>
+            No notes. <Button variant="hub">Create one</Button>
+          </p>
+        </Link>
       )}
     </>
   )

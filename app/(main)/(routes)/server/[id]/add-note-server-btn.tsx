@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { Note } from '@prisma/client'
 import { updateNoteInServer } from '@/actions/update/update-note-server'
-import { withHydrationError } from '@/lib/hoc'
+import { withHydrationError } from '@/components/hoc/with-hydration-error'
 
 // TODO: add classNames lib
 
@@ -41,7 +41,7 @@ const AddNoteToServerModal = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Add note</Button>
+        <Button variant="hub">Add note</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -54,8 +54,8 @@ const AddNoteToServerModal = ({
               return (
                 <div
                   key={id}
-                  className={`border border-current p-4 mb-4 ${
-                    noteId === id ? 'border-2 border-red-500' : ''
+                  className={`mb-4 border border-current p-4 ${
+                    noteId === id ? 'border-2 border-hub-600' : ''
                   }`}
                   onClick={() => setNoteId(id)}
                 >
@@ -65,7 +65,9 @@ const AddNoteToServerModal = ({
             })}
         </div>
         <DialogFooter>
-          <Button onClick={handleClick}>Add note</Button>
+          <Button variant="hub" onClick={handleClick}>
+            Add note
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
