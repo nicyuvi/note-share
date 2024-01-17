@@ -10,7 +10,7 @@ export async function deleteNote(id: number) {
       },
     })
     revalidatePath('/')
-    return { success: `Deleted note` }
+    return { success: `Deleted note ${id}` }
   } catch (e) {
     return { error: 'Failed to delete note' }
   }

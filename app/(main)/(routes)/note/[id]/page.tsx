@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { deleteNote } from '@/actions/delete/delete-note'
 import { useEffect, useState } from 'react'
 import { PRISMA_ERRORS } from '@/lib/constants'
+import { useRouter } from 'next/navigation'
 
 type ViewNoteProps = {
   params: { id: string }
@@ -13,6 +14,7 @@ type ViewNoteProps = {
 
 const ViewNote = ({ params }: ViewNoteProps) => {
   const noteId = params.id
+  const router = useRouter()
   const [note, setNote] = useState<Note>()
   useEffect(() => {
     async function getNoteHandler() {
@@ -37,6 +39,7 @@ const ViewNote = ({ params }: ViewNoteProps) => {
       alert(response.error)
     } else {
       alert(response.success)
+      router.push(`/`)
     }
   }
 
