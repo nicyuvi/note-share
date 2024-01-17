@@ -10,6 +10,7 @@ import { usePathname } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { getServers } from '@/actions/get/get-servers'
 import { useEffect } from 'react'
+import { useSidebarStore } from '@/store/zustand'
 
 const ROUTE = {
   home: '/',
@@ -21,15 +22,18 @@ const ROUTE = {
 const Sidebar = () => {
   const pathname = usePathname()
   const [servers, setServers] = useState<Server[]>()
+  const serversView = useSidebarStore((state) => state.servers)
+  const currServer = useSidebarStore((state) => state.currServer)
   useEffect(() => {
     const getServersHandler = async () => {
       const response = await getServers()
       if (response.error) notFound()
       const servers = response.success as Server[]
       setServers(servers)
+      currServer()
     }
     getServersHandler()
-  }, [])
+  }, [serversView, currServer])
 
   return (
     <nav className="bg-hub-500 px-2 py-4">

@@ -56,7 +56,6 @@ export async function createServer(formData: FormData) {
     await db.server.create({
       data,
     })
-    revalidatePath('/')
     return { success: `Created server: ${data.name}` }
   } catch (e) {
     return { error: 'Failed to create server' }
