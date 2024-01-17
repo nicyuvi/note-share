@@ -6,6 +6,13 @@ import AddNoteToServerModal from './add-note-server-btn'
 import { handlePromiseAllReject } from '@/lib/utils'
 import RemoveNoteBtn from './remove-note-server-btn'
 import { Separator } from '@/components/ui/separator'
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
@@ -26,25 +33,28 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
         <AddNoteToServerModal serverId={server.id} notes={allNotes} />
       </div>
       <Separator className="mb-6 bg-hub-600" />
-      {serverNotes.length > 0 ? (
-        serverNotes.map(({ id, title, content, authorName }: Note) => {
-          return (
-            <div
-              key={id}
-              className="mb-4 flex items-center justify-between bg-blue-100"
-            >
-              <div>
-                <p>{title}</p>
-                <p>{content}</p>
-                <p>{authorName}</p>
-              </div>
-              <RemoveNoteBtn noteId={id} />
-            </div>
-          )
-        })
-      ) : (
-        <p className="text-hub-600">No notes in this server</p>
-      )}
+      <div className="grid grid-cols-4 gap-4">
+        {serverNotes.length > 0 ? (
+          serverNotes.map(({ id, title, content, authorName }: Note) => {
+            return (
+              <Card key={id} className="min-h-full min-w-full bg-hub-500">
+                <CardHeader>
+                  <CardTitle>{title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p>{content}</p>
+                </CardContent>
+                <CardFooter className="block">
+                  <p className="mb-2">{authorName}</p>
+                  <RemoveNoteBtn noteId={id} />
+                </CardFooter>
+              </Card>
+            )
+          })
+        ) : (
+          <p className="text-hub-600">No notes in this server</p>
+        )}
+      </div>
     </>
   )
 }
