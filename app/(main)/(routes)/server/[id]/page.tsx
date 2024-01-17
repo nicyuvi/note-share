@@ -5,6 +5,7 @@ import { getNotes } from '@/actions/get/get-notes'
 import AddNoteToServerModal from './add-note-server-btn'
 import { handlePromiseAllReject } from '@/lib/utils'
 import RemoveNoteBtn from './remove-note-server-btn'
+import { Separator } from '@/components/ui/separator'
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
@@ -24,7 +25,7 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
         <h1 className="text-3xl font-bold text-hub-600">{server.name}</h1>
         <AddNoteToServerModal serverId={server.id} notes={allNotes} />
       </div>
-      <hr />
+      <Separator className="mb-6 bg-hub-600" />
       {serverNotes.length > 0 ? (
         serverNotes.map(({ id, title, content, authorName }: Note) => {
           return (
@@ -42,7 +43,7 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
           )
         })
       ) : (
-        <p>No notes in this server</p>
+        <p className="text-hub-600">No notes in this server</p>
       )}
     </>
   )
