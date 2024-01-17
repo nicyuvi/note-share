@@ -47,14 +47,14 @@ const ViewNote = ({ params }: ViewNoteProps) => {
   return (
     <>
       <h1 className="text-hub-h1 mb-6">{note.title}</h1>
-      <div>{note.content}</div>
-      <div>{note.authorName}</div>
+      <div className="mb-6">{note.content}</div>
+      <div className="mb-6">{note.authorName}</div>
       <Link href={`/note/${noteId}/edit`}>
-        <Button variant="outline" className="mb-4">
+        <Button variant="outline" size="sm" className="mr-4">
           Edit
         </Button>
       </Link>
-      <Button variant="destructive" onClick={handleDelete}>
+      <Button variant="destructive" size="sm" onClick={handleDelete}>
         Delete
       </Button>
     </>
