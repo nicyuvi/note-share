@@ -48,8 +48,8 @@ const CreateNote = () => {
   })
 
   return (
-    <div className="flex h-full flex-col items-center justify-center text-hub-600">
-      <h1 className="mb-6 text-3xl font-bold text-hub-600">Create Note</h1>
+    <div className="flex h-full flex-col items-center text-hub-600">
+      <h1 className="text-hub-h1 mb-6">Create Note</h1>
       <Form {...form}>
         <form action={action} className="w-64 space-y-8">
           <FormField

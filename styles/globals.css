@@ -7,6 +7,13 @@
   width: 0px;
 }
 
+@layer components {
+  .text-hub-h1 {
+    @apply text-3xl font-bold text-hub-600;
+  }
+  /* ... */
+}
+
 @layer base {
   :root {
     color-scheme: light dark;

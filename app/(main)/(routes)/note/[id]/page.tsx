@@ -46,7 +46,7 @@ const ViewNote = ({ params }: ViewNoteProps) => {
 
   return (
     <>
-      <div>{note.title}</div>
+      <h1 className="text-hub-h1 mb-6">{note.title}</h1>
       <div>{note.content}</div>
       <div>{note.authorName}</div>
       <Link href={`/note/${noteId}/edit`}>
