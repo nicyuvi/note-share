@@ -2,12 +2,12 @@ import { create } from 'zustand'
 
 type SidebarStore = {
   servers: boolean
-  addServer: () => void
+  updateServer: () => void
   currServer: () => void
 }
 
 export const useSidebarStore = create<SidebarStore>((set) => ({
   servers: false,
-  addServer: () => set({ servers: true }),
+  updateServer: () => set({ servers: true }),
   currServer: () => set({ servers: false }),
 }))

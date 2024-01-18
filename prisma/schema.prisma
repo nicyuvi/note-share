@@ -36,8 +36,9 @@ model Note {
   authorName String
   author     Profile @relation(fields: [authorId, authorName], references: [userId, name], onUpdate: Cascade, onDelete: Cascade)
 
+  // set default to null instead of not required
   serverId Int?
-  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: Cascade)
+  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: SetNull)
 }
 
 model Server {

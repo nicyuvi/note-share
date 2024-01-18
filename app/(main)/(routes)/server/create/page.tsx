@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation'
 import { useSidebarStore } from '@/store/zustand'
 
 const CreateServer = () => {
-  const addServer = useSidebarStore((state) => state.addServer)
+  const updateServer = useSidebarStore((state) => state.updateServer)
   const router = useRouter()
   const formSchema = z.object({
     name: z.string().min(1).max(50),
@@ -38,7 +38,7 @@ const CreateServer = () => {
       alert(response.error)
     } else {
       alert(response.success)
-      addServer()
+      updateServer()
       router.push('/')
     }
   })
