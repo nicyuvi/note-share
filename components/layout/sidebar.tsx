@@ -51,7 +51,7 @@ const Sidebar = () => {
           <Separator className="mb-2 bg-hub-600" />
           <li>
             <Link href={ROUTE.serverCreate}>
-              <CustomTooltip content="Create Server">
+              <CustomTooltip content="Add Server">
                 <SidebarIcon
                   classes="mb-2"
                   active={pathname === ROUTE.serverCreate}
