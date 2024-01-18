@@ -13,6 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import ServerViewOptions from './server-view-options'
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
   let res = await Promise.all([
@@ -30,7 +31,10 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
     <>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-hub-600">{server.name}</h1>
-        <AddNoteToServerModal serverId={server.id} notes={allNotes} />
+        <div className="flex items-center">
+          <AddNoteToServerModal serverId={server.id} notes={allNotes} />
+          <ServerViewOptions />
+        </div>
       </div>
       <Separator className="mb-6 bg-hub-600" />
       <div className="grid grid-cols-4 gap-4">
