@@ -38,26 +38,29 @@ const JoinServer = () => {
   })
 
   return (
-    <Form {...form}>
-      <form action={action} className="mb-4 flex w-64 space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Invite Code</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button variant="hub" type="submit">
-          Join
-        </Button>
-      </form>
-    </Form>
+    <>
+      <h2 className="text-hub-h1 mb-4">Join a Server</h2>
+      <Form {...form}>
+        <form action={action} className="mb-4 flex w-64 space-y-8">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="mr-4">
+                <FormLabel>Invite Code</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button variant="hub" type="submit">
+            Join
+          </Button>
+        </form>
+      </Form>
+    </>
   )
 }
 

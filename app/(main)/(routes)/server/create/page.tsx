@@ -47,7 +47,7 @@ const CreateServer = () => {
 
   return (
     <div className="flex h-full flex-col items-center">
-      <h1 className="text-hub-h1 mb-6">Create a Server</h1>
+      <h1 className="text-hub-h1 mb-4">Create a Server</h1>
       <Form {...form}>
         <form action={action} className="mb-4 w-64 space-y-8">
           <FormField
@@ -81,8 +81,7 @@ const CreateServer = () => {
           </Button>
         </form>
       </Form>
-      {/* <Separator className="mb-4 w-1/2" /> */}
-      <div className="flex w-1/2 items-center">
+      <div className="mb-4 flex w-1/2 items-center">
         <div className="flex-1 border-t-2 border-gray-200"></div>
         <span className="bg-white px-3 text-gray-500">Or</span>
         <div className="flex-1 border-t-2 border-gray-200"></div>
