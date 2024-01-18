@@ -34,10 +34,10 @@ model Note {
 
   authorId   String
   authorName String
-  author     Profile @relation(fields: [authorId, authorName], references: [userId, name], onUpdate: NoAction, onDelete: NoAction)
+  author     Profile @relation(fields: [authorId, authorName], references: [userId, name], onUpdate: Cascade, onDelete: Cascade)
 
   serverId Int?
-  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: NoAction)
+  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: Cascade)
 }
 
 model Server {
@@ -64,10 +64,10 @@ model Member {
   role MemberRole @default(GUEST)
 
   serverId Int?
-  Server   Server? @relation(fields: [serverId], references: [id])
+  Server   Server? @relation(fields: [serverId], references: [id], onUpdate: NoAction, onDelete: Cascade)
 
   profileId Int?
-  Profile   Profile? @relation(fields: [profileId], references: [id])
+  Profile   Profile? @relation(fields: [profileId], references: [id], onUpdate: Cascade, onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
