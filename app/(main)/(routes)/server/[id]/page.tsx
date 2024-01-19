@@ -2,7 +2,7 @@ import { getServer } from '@/actions/get/get-server'
 import { Note, Server } from '@prisma/client'
 import { getNotesServer } from '@/actions/get/get-notes-server'
 import { getNotes } from '@/actions/get/get-notes'
-import AddNoteToServerModal from './add-note-server-btn'
+import AddNoteToServerModal from './add-note-server-modal'
 import { handlePromiseAllReject } from '@/lib/utils'
 import RemoveNoteBtn from './remove-note-server-btn'
 import { Separator } from '@/components/ui/separator'
@@ -33,7 +33,10 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
         <h1 className="text-3xl font-bold text-hub-600">{server.name}</h1>
         <div className="flex items-center">
           <AddNoteToServerModal serverId={server.id} notes={allNotes} />
-          <ServerViewOptions serverId={params.id} />
+          <ServerViewOptions
+            serverId={params.id}
+            inviteCode={server.inviteCode}
+          />
         </div>
       </div>
       <Separator className="mb-6 bg-hub-600" />

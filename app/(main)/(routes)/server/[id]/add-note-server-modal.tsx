@@ -8,12 +8,10 @@ import {
   DialogFooter,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Note } from '@prisma/client'
 import { updateNoteInServer } from '@/actions/update/update-note-server'
 import { withHydrationError } from '@/components/hoc/with-hydration-error'
-
-// TODO: add classNames lib
 
 type AddNoteToServerModalProps = {
   notes: Note[]
