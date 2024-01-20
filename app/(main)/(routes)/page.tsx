@@ -9,7 +9,7 @@ import { handlePromiseAllReject } from '@/lib/utils'
 import { PRISMA_ERRORS } from '@/lib/constants'
 
 const Home = async () => {
-  let res = await Promise.all([getProfile(), getNotes()])
+  const res = await Promise.all([getProfile(), getNotes()])
   if (res[0].error === PRISMA_ERRORS.P2025.name) redirect('/profile/create')
   handlePromiseAllReject(res)
 

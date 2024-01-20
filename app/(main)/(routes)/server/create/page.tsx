@@ -1,4 +1,3 @@
-// db.server.create data: {profileId, name, members: {create: {profileId, role: MemberRole.ADMIN, }}}
 'use client'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,7 +15,6 @@ import { Input } from '@/components/ui/input'
 import { createServer } from '@/actions/create/create-server'
 import { useRouter } from 'next/navigation'
 import { useSidebarStore } from '@/store/zustand'
-import { Separator } from '@/components/ui/separator'
 import JoinServer from './join-server'
 
 const CreateServer = () => {

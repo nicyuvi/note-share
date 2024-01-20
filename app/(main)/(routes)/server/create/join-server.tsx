@@ -11,30 +11,32 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { createMember } from '@/actions/create/create-member'
+import { useRouter } from 'next/navigation'
+import { useSidebarStore } from '@/store/zustand'
 
 const JoinServer = () => {
+  const router = useRouter()
+  const updateServer = useSidebarStore((state) => state.updateServer)
   const formSchema = z.object({
-    name: z.string().min(1).max(50),
-    imageUrl: z.string(),
+    inviteCode: z.string().min(1),
   })
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      imageUrl: '',
+      inviteCode: '',
     },
   })
 
   const action: () => void = form.handleSubmit(async (data) => {
-    console.log(data)
-    // const response = await createServer(data)
-    // if (response.error) {
-    //   alert(response.error)
-    // } else {
-    //   alert(response.success)
-    //   updateServer()
-    //   router.push('/')
-    // }
+    const res = await createMember(data)
+    if (res.error) {
+      alert(res.error)
+    } else {
+      alert(res.success)
+      updateServer()
+      router.push('/')
+    }
   })
 
   return (
@@ -44,7 +46,7 @@ const JoinServer = () => {
         <form action={action} className="mb-4 flex w-64 space-y-8">
           <FormField
             control={form.control}
-            name="name"
+            name="inviteCode"
             render={({ field }) => (
               <FormItem className="mr-4">
                 <FormLabel>Invite Code</FormLabel>

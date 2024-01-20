@@ -8,6 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function handlePromiseAllReject(res: Array<any>) {
   for (let i = 0; i < res.length; i++) {
+    // prisma.findUnique returns success: null if not found
     if (res[i].success === null || res[i].error) {
       return notFound()
     }

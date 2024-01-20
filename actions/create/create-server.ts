@@ -3,14 +3,11 @@ import db from '@/lib/db'
 import * as z from 'zod'
 import { getProfile } from '../get/get-profile'
 import { MemberRole } from '@prisma/client'
-import { revalidatePath } from 'next/cache'
 
 type FormData = {
   name: string
   imageUrl?: string
 }
-
-const MEMBER_ROLE = ['ADMIN', 'GUEST'] as const
 
 export async function createServer(formData: FormData) {
   const response = await getProfile()
@@ -27,7 +24,7 @@ export async function createServer(formData: FormData) {
     members: z.object({
       create: z.object({
         profileId: z.number().min(1),
-        role: z.enum(MEMBER_ROLE),
+        role: z.nativeEnum(MemberRole),
       }),
     }),
   })
@@ -46,17 +43,17 @@ export async function createServer(formData: FormData) {
   })
 
   if (!parse.success) {
-    // TODO: i need to log parse.error somewhere
+    console.log(parse.error)
     return { error: 'Failed to parse server data' }
   }
 
   const data = parse.data
 
   try {
-    await db.server.create({
+    const serverRes = await db.server.create({
       data,
     })
-    return { success: `Created server: ${data.name}` }
+    return { success: `Created server: ${serverRes.name}` }
   } catch (e) {
     return { error: 'Failed to create server' }
   }

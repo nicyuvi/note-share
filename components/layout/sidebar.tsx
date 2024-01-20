@@ -26,11 +26,15 @@ const Sidebar = () => {
   const currServer = useSidebarStore((state) => state.currServer)
   useEffect(() => {
     const getServersHandler = async () => {
-      const response = await getServers()
-      if (response.error) notFound()
-      const servers = response.success as Server[]
-      setServers(servers)
-      currServer()
+      try {
+        const response = await getServers()
+        if (response.error) throw new Error(response.error)
+        const servers = response.success as Server[]
+        setServers(servers)
+        currServer()
+      } catch (e) {
+        console.log(e)
+      }
     }
     getServersHandler()
   }, [serversView, currServer])

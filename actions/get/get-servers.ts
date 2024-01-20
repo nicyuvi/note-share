@@ -9,9 +9,9 @@ const ERROR_MESSAGE = 'Failed to get servers'
 
 export async function getServers() {
   try {
-    const response = await getProfile()
-    if (response.error) throw new Error()
-    const profile = response.success as Profile
+    const res = await getProfile()
+    if (res.error) throw new Error()
+    const profile = res.success as Profile
     const servers = await db.server.findMany({
       where: {
         members: {

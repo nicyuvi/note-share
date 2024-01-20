@@ -1,6 +1,7 @@
 'use server'
 import db from '@/lib/db'
 import { auth } from '@clerk/nextjs'
+import { revalidatePath } from 'next/cache'
 import * as z from 'zod'
 
 type FormData = {
@@ -38,6 +39,7 @@ export async function createProfile(formData: FormData) {
     await db.profile.create({
       data,
     })
+    revalidatePath('/')
     return { success: `Created profile ${data.name}` }
   } catch (e) {
     return { error: 'Failed to create profile' }
