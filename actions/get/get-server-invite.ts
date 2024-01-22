@@ -4,6 +4,9 @@ import { Prisma } from '@prisma/client'
 import { PRISMA_ERRORS } from '@/lib/constants'
 
 const ERROR_MESSAGE = 'Failed to get server'
+const includeMembers = Prisma.validator<Prisma.ServerInclude>()({
+  members: true,
+})
 
 export async function getServerByInvite(inviteCode: string) {
   try {
@@ -11,6 +14,7 @@ export async function getServerByInvite(inviteCode: string) {
       where: {
         inviteCode,
       },
+      include: includeMembers,
     })
     return { success: server }
   } catch (e) {
