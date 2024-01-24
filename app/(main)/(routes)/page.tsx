@@ -1,4 +1,4 @@
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import Notes from './notes'
 import { getProfile } from '@/actions/get/get-profile'
 import { getNotes } from '@/actions/get/get-notes'
@@ -9,11 +9,12 @@ import { handlePromiseAllReject } from '@/lib/utils'
 import { PRISMA_ERRORS } from '@/lib/constants'
 
 const Home = async () => {
-  const res = await Promise.all([getProfile(), getNotes()])
-  if (res[0].error === PRISMA_ERRORS.P2025.name) redirect('/profile/create')
-  handlePromiseAllReject(res)
+  const profileRes = await getProfile()
+  if (profileRes.error === PRISMA_ERRORS.P2025.name) redirect('/profile/create')
+  const notesRes = await getNotes()
+  if (notesRes.error) notFound()
 
-  const notes = res[1].success as Note[]
+  const notes = notesRes.success as Note[]
 
   return (
     <>
