@@ -12,7 +12,8 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "*.{ts,tsx}": "eslint --fix",
+    "*.{ts,tsx,css,md}": "prettier --write"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.3",
