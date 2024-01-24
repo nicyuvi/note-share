@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
 import { Note } from '@prisma/client'
-import { updateNoteInServer } from '@/actions/update/update-note-server'
+import { addNoteToServer } from '@/actions/update/add-note-server'
 import { withHydrationError } from '@/components/hoc/with-hydration-error'
 
 type AddNoteToServerModalProps = {
@@ -27,7 +27,7 @@ const AddNoteToServerModal = ({
 
   async function handleClick() {
     if (!noteId) return null
-    const response = await updateNoteInServer(noteId, { serverId })
+    const response = await addNoteToServer(noteId, serverId)
     if (response.error) {
       throw new Error(response.error)
     } else {

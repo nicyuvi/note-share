@@ -1,25 +1,32 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import { updateNoteInServer } from '@/actions/update/update-note-server'
+import { removeNoteInServer } from '@/actions/update/remove-note-server'
 
-const REMOVE_NOTE_ID = null
+type RemoveNoteInServerBtnProps = {
+  noteId: number
+  serverId: number
+}
 
-const RemoveNoteBtn = ({ noteId }: { noteId: number }) => {
+const RemoveNoteInServerBtn = ({
+  noteId,
+  serverId,
+}: RemoveNoteInServerBtnProps) => {
   async function handleClick(): Promise<void> {
-    const response = await updateNoteInServer(noteId, {
-      serverId: REMOVE_NOTE_ID,
-    })
-    if (response.error) {
-      throw new Error(response.error)
+    const res = await removeNoteInServer(noteId, serverId)
+    if (res.error) {
+      alert(res.error)
     } else {
-      alert(response.success) // replace alert with toast
+      alert(res.success)
     }
   }
+
   return (
-    <Button onClick={handleClick} variant="destructive" size="sm">
-      remove
-    </Button>
+    <>
+      <Button onClick={handleClick} variant="destructive" size="sm">
+        remove
+      </Button>
+    </>
   )
 }
 
-export default RemoveNoteBtn
+export default RemoveNoteInServerBtn

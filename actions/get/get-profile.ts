@@ -9,7 +9,7 @@ const ERROR_MESSAGE = 'Failed to get profile'
 export async function getProfile() {
   try {
     const { userId } = auth()
-    if (userId === null) throw new Error()
+    if (userId === null) throw new Error() // todo: return to login instead of throwing error
     const profile = await db.profile.findUniqueOrThrow({
       where: {
         userId,
