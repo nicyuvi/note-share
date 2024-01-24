@@ -16,6 +16,8 @@ const Home = async () => {
 
   const notes = notesRes.success as Note[]
 
+  console.log('husky test')
+
   return (
     <>
       <div className="flex justify-end">
