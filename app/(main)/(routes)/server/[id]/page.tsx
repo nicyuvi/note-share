@@ -4,7 +4,7 @@ import { getNotesServer } from '@/actions/get/get-notes-server'
 import { getNotes } from '@/actions/get/get-notes'
 import AddNoteToServerModal from './add-note-server-modal'
 import { handlePromiseAllReject } from '@/lib/utils'
-import RemoveNoteBtn from './remove-note-server-btn'
+import RemoveNoteInServerBtn from './remove-note-server-btn'
 import { Separator } from '@/components/ui/separator'
 import {
   Card,
@@ -16,9 +16,10 @@ import {
 import ServerViewOptions from './server-view-options'
 
 const ServerView = async ({ params }: { params: { id: string } }) => {
+  const serverId = Number(params.id)
   let res = await Promise.all([
-    getServer(Number(params.id)),
-    getNotesServer(Number(params.id)),
+    getServer(serverId), // can get member list
+    getNotesServer(serverId),
     getNotes(),
   ])
   handlePromiseAllReject(res)
@@ -32,9 +33,9 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold text-hub-600">{server.name}</h1>
         <div className="flex items-center">
-          <AddNoteToServerModal serverId={server.id} notes={allNotes} />
+          <AddNoteToServerModal serverId={serverId} notes={allNotes} />
           <ServerViewOptions
-            serverId={params.id}
+            serverId={serverId}
             inviteCode={server.inviteCode}
           />
         </div>
@@ -53,7 +54,7 @@ const ServerView = async ({ params }: { params: { id: string } }) => {
                 </CardContent>
                 <CardFooter className="block">
                   <p className="mb-2">{authorName}</p>
-                  <RemoveNoteBtn noteId={id} />
+                  <RemoveNoteInServerBtn noteId={id} serverId={serverId} />
                 </CardFooter>
               </Card>
             )
