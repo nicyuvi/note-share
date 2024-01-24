@@ -21,7 +21,7 @@ model Profile {
   servers Server[]
   members Member[]
 
-  @@unique([userId, name], name: "profile_identifier")
+  @@unique([id, name], name: "profile_identifier")
 }
 
 model Note {
@@ -32,9 +32,9 @@ model Note {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  authorId   String
+  authorId   Int
   authorName String
-  author     Profile @relation(fields: [authorId, authorName], references: [userId, name], onUpdate: Cascade, onDelete: Cascade)
+  author     Profile @relation(fields: [authorId, authorName], references: [id, name], onUpdate: Cascade, onDelete: Cascade)
 
   // set default to null instead of not required
   serverId Int?
