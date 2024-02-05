@@ -4,7 +4,7 @@ import { getProfile } from '@/actions/get/get-profile'
 import { getNotes } from '@/actions/get/get-notes'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { Note, Profile } from '@prisma/client'
+import { Note } from '@prisma/client'
 import { handlePromiseAllReject } from '@/lib/utils'
 import { PRISMA_ERRORS } from '@/lib/constants'
 
