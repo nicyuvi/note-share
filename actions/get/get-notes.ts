@@ -1,15 +1,17 @@
 'use server'
 import db from '@/lib/db'
 import { auth } from '@clerk/nextjs'
+import { getProfile } from '@/actions/get/get-profile'
 
 export async function getNotes() {
-  const { userId } = auth()
-  if (!userId) throw new Error()
+  const res = await getProfile()
+  if (res.error) throw new Error()
+  const profile = res.success
 
   try {
     const notes = await db.note.findMany({
       where: {
-        authorId: userId,
+        authorId: profile?.id,
       },
     })
     return { success: notes }

@@ -12,12 +12,11 @@ type FormData = {
 
 // author id is userId
 export async function createNote(formData: FormData) {
-  const { userId } = auth()
   const res = await getProfile()
 
   const { title, content } = formData
   const schema = z.object({
-    authorId: z.string(),
+    authorId: z.number(),
     authorName: z.string(),
     title: z.string().min(1).max(50),
     content: z.string().min(1).max(255),
@@ -25,7 +24,7 @@ export async function createNote(formData: FormData) {
 
   // safe parse so we can handle errors when validation fails
   const parse = schema.safeParse({
-    authorId: userId,
+    authorId: res.success?.id,
     authorName: res.success?.name,
     title,
     content,

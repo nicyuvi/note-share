@@ -17,7 +17,7 @@ import { PRISMA_ERRORS } from '@/lib/constants'
 import InviteUsersModal from './invite-users-modal'
 
 type ServerViewOptionsProps = {
-  serverId: string
+  serverId: number
   inviteCode: string
 }
 
@@ -29,7 +29,7 @@ const ServerViewOptions = ({
   const router = useRouter()
 
   async function deleteHandler() {
-    const res = await deleteServer(Number(serverId))
+    const res = await deleteServer(serverId)
     if (res.error) {
       if (res.error === PRISMA_ERRORS.P2003.name) {
         alert(PRISMA_ERRORS.P2003.message)
